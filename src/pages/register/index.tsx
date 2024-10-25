@@ -1,10 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logoImg from '../../assets/logo.png';
 import { Container } from '../../components/container';
 import { Input } from '../../components/input';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+
+import {auth} from '../../services/firebaseConnection';
+import { createUserWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { useEffect } from 'react';
 
 type FormData = z.infer<typeof schema>
 const schema = z.object({
@@ -13,15 +17,38 @@ const schema = z.object({
     password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres")
  });
   
-function onSubmit(data: FormData){
-    console.log(data)
-}
+
 
 export function Register(){
+   const navigate = useNavigate();
    const {register, handleSubmit, formState:{errors}} = useForm<FormData>({
     resolver: zodResolver(schema),
     mode: "onChange"
    })
+
+   useEffect(() => {
+        async function handleLogout(){
+            await signOut(auth)
+        }
+
+        handleLogout();
+    }, [])
+
+   async function onSubmit(data: FormData){
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+        .then(async (user) => {
+            await updateProfile(user.user,{
+                displayName: data.name
+            })
+
+            console.log("Cadastrado com sucesso ")
+            navigate("/dashboard", {replace:true})
+        })
+        .catch((error) =>{
+            console.log("Erro ao cadastrar o usuario")
+            console.log(error)
+        })
+    }
     return(
         <Container>
             <div className='w-full min-h-screen flex justify-center items-center flex-col gap-4'>
@@ -72,7 +99,7 @@ export function Register(){
                     </div>
                     
                    
-                   <button className='bg-zinc-900 w-full rounded-md text-white h-10 font-medium'>Acessar</button>
+                   <button className='bg-zinc-900 w-full rounded-md text-white h-10 font-medium'>Cadastrar</button>
                 </form>
 
                 <Link to="/login">
