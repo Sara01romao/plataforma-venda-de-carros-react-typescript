@@ -36,7 +36,7 @@ export function Login(){
 
    function onSubmit(data: FormData){
     signInWithEmailAndPassword(auth, data.email, data.password)
-    .then((user) => {
+    .then(() => {
         console.log("Logado com Sucesso");
         navigate("/dashboard", {replace:true})
     })
