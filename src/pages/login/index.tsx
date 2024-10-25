@@ -16,10 +16,6 @@ function onSubmit(data: FormData){
     console.log(data)
 }
 
-
-
-
-
 export function Login(){
    const {register, handleSubmit, formState:{errors}} = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -37,7 +33,7 @@ export function Login(){
                 </Link>
 
                 <form 
-                  className="bg-white max-w-xl w-full rounded-lg"
+                  className="bg-white max-w-xl w-full rounded-lg p-4"
                   onSubmit={handleSubmit(onSubmit)}
                 >
 
@@ -64,8 +60,11 @@ export function Login(){
                   </div>
                   
                    
-                   <button className='bg-slate-950 text-white'>Acessar</button>
+                   <button className='bg-zinc-900 w-full rounded-md text-white h-10 font-medium'>Acessar</button>
                 </form>
+                <Link to="/login">
+                    Ainda não possui uma conta? Cadastra-se.
+                </Link>
 
             </div>
         </Container>
