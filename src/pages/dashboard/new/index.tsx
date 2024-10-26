@@ -5,6 +5,18 @@ import {useForm} from 'react-hook-form'
 import { Input } from "../../../components/input";
 import { z } from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ChangeEvent, useContext } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
+import {v4 as uuidV4} from 'uuid';
+
+
+import{
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    deleteObject
+} from 'firebase/storage'
+import { storage } from "../../../services/firebaseConnection";
 
 const schema = z.object({
     name: z.string().min(4, 'O nome do carro é obrigatório'),
@@ -25,10 +37,46 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function New(){
+    const { user } = useContext(AuthContext)
     const {register, handleSubmit, formState:{errors}, reset} = useForm<FormData>({
         resolver: zodResolver(schema),
         mode: "onChange"
     })
+
+    async function handleFile(e: ChangeEvent<HTMLInputElement>) {
+        if (e.target.files && e.target.files[0]) {
+            const image = e.target.files[0];
+            
+            if (image.type === 'image/jpeg' || image.type === 'image/png') {
+                await handleUpload(image);
+            } else {
+                alert("Enviar uma imagem jpeg ou png");
+                return;
+            }
+    
+            console.log(image);
+        }
+    }
+    
+    async function handleUpload(image: File) {
+        if (!user?.uid) { // Corrigido: só retorna se user.uid não existir
+            console.error("User ID não encontrado.");
+            return;
+        }
+    
+        const currentUid = user.uid;
+        const uidImage = uuidV4();
+        const uploadRef = ref(storage, `images/${currentUid}/${uidImage}`);
+        
+        try {
+            const snapshot = await uploadBytes(uploadRef, image);
+            const downloadUrl = await getDownloadURL(snapshot.ref);
+            console.log("URL de acesso à foto:", downloadUrl);
+        } catch (error) {
+            console.error("Erro ao fazer upload da imagem:", error);
+        }
+    }
+    
 
     function onSubmit(data: FormData){
         console.log(data)
@@ -44,7 +92,12 @@ export function New(){
                         <FiUpload size={30} color="#000"/>
                     </div>
                     <div className="absolute cursor-pointer">
-                        <input type="file" accept="image/*" className="opacity-0 cursor-pointer" />
+                        <input 
+                            type="file" 
+                            accept="image/*" 
+                            className="opacity-0 cursor-pointer" 
+                            onChange={handleFile}
+                        />
                     </div>
                 </button>
             </div>
