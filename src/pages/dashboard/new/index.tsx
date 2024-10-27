@@ -9,14 +9,14 @@ import { ChangeEvent, useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import {v4 as uuidV4} from 'uuid';
 
-
+import { storage, db } from "../../../services/firebaseConnection";
 import{
     ref,
     uploadBytes,
     getDownloadURL,
     deleteObject
 } from 'firebase/storage'
-import { storage } from "../../../services/firebaseConnection";
+import {addDoc, collection} from 'firebase/firestore';
 
 const schema = z.object({
     name: z.string().min(4, 'O nome do carro é obrigatório'),
@@ -98,7 +98,43 @@ export function New(){
     
 
     function onSubmit(data: FormData){
-        // console.log(data)
+        if(carImages.length === 0){
+            alert("Envie alguma imagem deste carro!")
+            return;
+        }
+
+        const carListImages = carImages.map(car =>{
+            return{
+                uid: car.uid,
+                name: car.name,
+                url: car.url
+            }
+        })
+
+        addDoc(collection(db, "cars"),{
+            name: data.name,
+            model: data.model,
+            whatsappp: data.whatsapp,
+            city: data.city,
+            year: data.year,
+            km: data.km,
+            price: data.price,
+            description: data.description,
+            created: new Date(),
+            owner: user?.name,
+            uid:user?.uid,
+            images:carListImages
+
+        })
+        .then(() =>{
+            reset();
+            setCarImages([]);
+            console.log('Cadastrado com sucesso')
+        })
+        .catch((error) =>{
+            console.log(error)
+            console.log("Erro ao cadastrar")
+        })
     }
 
     async function handleDeleteImage(item: ImageItemProps){
