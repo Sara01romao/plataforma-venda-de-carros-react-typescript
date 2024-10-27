@@ -87,7 +87,7 @@ export function Login(){
                    
                    <button className='bg-zinc-900 w-full rounded-md text-white h-10 font-medium'>Acessar</button>
                 </form>
-                <Link to="/login">
+                <Link to="/register">
                     Ainda não possui uma conta? Cadastra-se.
                 </Link>
 
