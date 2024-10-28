@@ -114,7 +114,7 @@ export function New(){
         addDoc(collection(db, "cars"),{
             name: data.name,
             model: data.model,
-            whatsappp: data.whatsapp,
+            whatsapp: data.whatsapp,
             city: data.city,
             year: data.year,
             km: data.km,
