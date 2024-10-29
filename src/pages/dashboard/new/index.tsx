@@ -112,7 +112,7 @@ export function New(){
         })
 
         addDoc(collection(db, "cars"),{
-            name: data.name,
+            name: data.name.toLocaleUpperCase(),
             model: data.model,
             whatsapp: data.whatsapp,
             city: data.city,
