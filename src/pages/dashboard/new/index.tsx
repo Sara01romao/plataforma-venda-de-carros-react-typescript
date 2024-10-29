@@ -17,6 +17,7 @@ import{
     deleteObject
 } from 'firebase/storage'
 import {addDoc, collection} from 'firebase/firestore';
+import toast from "react-hot-toast";
 
 const schema = z.object({
     name: z.string().min(4, 'O nome do carro é obrigatório'),
@@ -88,6 +89,7 @@ export function New(){
                 }
 
                 setCarImages((images) => [...images, imageItem])
+                toast.success("Imagem enviada com sucesso!")
             })
 
             console.log("URL de acesso à foto:", downloadUrl);
@@ -99,7 +101,8 @@ export function New(){
 
     function onSubmit(data: FormData){
         if(carImages.length === 0){
-            alert("Envie alguma imagem deste carro!")
+            toast.error("Envie pelo menos uma imagem")
+           
             return;
         }
 
@@ -130,6 +133,7 @@ export function New(){
             reset();
             setCarImages([]);
             console.log('Cadastrado com sucesso')
+            toast.success("Cadastrado com sucesso!")
         })
         .catch((error) =>{
             console.log(error)
@@ -144,7 +148,8 @@ export function New(){
 
         try{
             await deleteObject(imageRef)
-            setCarImages(carImages.filter((car) => car.url !== item.url))
+            setCarImages(carImages.filter((car) => car.url !== item.url));
+            toast.success("Removido com sucesso!")
         }catch(err){
             console.log("Erro ao Deletar")
         }
