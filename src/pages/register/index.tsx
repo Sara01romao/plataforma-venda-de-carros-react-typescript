@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import logoImg from '../../assets/logo.png';
+import logoWebCarros from '../../assets/logo-webcarros.svg';
 import { Container } from '../../components/container';
 import { Input } from '../../components/input';
 import { z } from 'zod';
@@ -66,7 +66,7 @@ export function Register(){
             <div className='w-full min-h-screen flex justify-center items-center flex-col gap-4'>
                 <Link to="/" className='mb-6 max-w-sm w-full'>
                     <img 
-                        src={logoImg} 
+                        src={logoWebCarros} 
                         alt="Logo do Site" 
                         className="w-full"    
                     />

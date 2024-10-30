@@ -1,5 +1,5 @@
 import { FiLogIn, FiUser } from 'react-icons/fi';
-import logoImg from '../../assets/logo.png'
+import logoImg from '../../assets/logo-webcarros.svg'
 import { Link } from "react-router-dom";
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -11,9 +11,10 @@ export function Header(){
         <div className='w-full flex items-center justify-center h-16 bg-white drop-shadow md-4'>
              <header className='flex w-full max-w-7xl items-center justify-between px-4 mx-auto' >
                 <Link to="/">
-                <img 
+                <img style={{width:"180px"}}
                         src={logoImg}
-                        alt="Logo"
+                        alt="Logo do Site" 
+                       
                     />
                 </Link>
                 

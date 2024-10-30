@@ -9,7 +9,6 @@ import {
     where
 } from 'firebase/firestore';
 import { db } from "../../services/firebaseConnection";
-import { string } from "zod";
 import { Link } from "react-router-dom";
 
 interface CarsProps{
@@ -39,7 +38,7 @@ export function Home(){
 
     useEffect(() =>{
         loadCars()
-    },[])
+    },[input])
 
     function loadCars(){
         const carsRef = collection(db, "cars");
@@ -113,7 +112,7 @@ export function Home(){
 
     return(
         <Container>
-            <section className="bg-white p-4 rounded-lg w-full max-w-3xl mx-auto flex justify-center items-center gap-2">
+            <section className="bg-white mt-3 p-4 rounded-lg w-full max-w-3xl mx-auto flex justify-center items-center gap-2">
                 <input type="text"
                  className="w-full border-2 rounded-lg h-9 px-3 outline-none"
                  placeholder="Digite o nome do carro..."
@@ -147,20 +146,17 @@ export function Home(){
                                 onLoad={() => handleImageLoad(car.id)}
                                 style={{display: loadImages.includes(car.id) ? "block" : "none"}}
                             />
-                            <p className="font-bold mt-l mb-2 px-2" >{car.name}</p>
-
-                            <div className="flex flex-col px-2">
-                                <span className="text-zinc-700 mb-6">Ano {car.year} | {car.km} km</span>
-                                <strong className="text-black font-medium text-xl">R$ {car.price}</strong>
-                            </div>
-
-                            <div></div>
-
-                            <div className="p-2">
-                                <span>
+                            <p className="font-bold mt-l px-2" >{car.name}</p>
+                            <div className="px-2  mb-2">
+                                <small className="text-sm font-medium">
                                     {car.city}
-                                </span>
+                                </small>
                             </div>
+                            <div className="flex flex-col px-2">
+                                <span className="text-zinc-700 mb-4">Ano {car.year} | {car.km} km</span>
+                                <strong className="text-black font-medium text-xl mb-3">R$ {car.price}</strong>
+                            </div>
+
                         </section>
                     </Link>
                 ))}

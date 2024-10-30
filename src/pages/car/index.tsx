@@ -119,22 +119,22 @@ export function Car(){
                         <h1 className="font-bold text-3xl text-black">{car?.name}</h1>
                         <h1 className="font-bold text-3xl text-black">R$ {car?.price}</h1>
                     </div>
-                    <p>{car?.model}</p>
+                    <p>Modelo: {car?.model}</p>
 
                     <div className="flex w-full gap-6 my-4">
                         <div className="flex flex-col gap-4">
-                            <div>
-                                <p>Cidade</p>
+                            <div className="flex items-center gap-2">
+                                <p>Cidade: </p>
                                 <strong>{car?.city}</strong>
                             </div>
-                            <div>
+                            <div className="flex items-center gap-2">
                                 <p>Ano</p>
                                 <strong>{car?.year}</strong>
                             </div>
                         </div>
 
                         <div className="flex flex-col gap-4">
-                            <div>
+                            <div className="flex items-center gap-2">
                                 <p>KM</p>
                                 <strong>{car?.km}</strong>
                             </div>
@@ -143,11 +143,18 @@ export function Car(){
 
                     </div>
 
-                    <strong> Descrição:</strong>
-                    <p className="mb-4">{car?.description}</p>
-
                     <strong>Telefone / Whatsapp</strong>
                     <p>{car?.whatsapp}</p>
+
+                    <p className="mt-5"><strong>Descrição: </strong> </p>
+                    <div className=" mt-1 p-2 w-full border-solid border-2 border-grey-200 rounded-lg ">
+                        
+                        <p className="mb-4">{car?.description}</p>
+                    </div>
+
+                   
+
+                    
 
                     <a 
                         href={`https://api.whatsapp.com/send?phone=${car?.whatsapp}&text=Olá vi esse ${car?.name} e fiquei interessado.`}
