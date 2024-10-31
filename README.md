@@ -1,3 +1,60 @@
+
+<h2 align="center"> 💻 Sistema de Vendas de Ingresso de Cinema </h2> 
+
+<p align="center">
+  
+
+  <img max-width="auto" height="auto"  src="https://github.com/user-attachments/assets/c88256ac-2f91-4fe1-b983-54b7dd0b6cb2">
+
+
+</p> 
+
+
+
+## 💻  Sobre o Projeto  
+Sistema de Venda de Carros desenvolvido com React, TypeScript e Firebase durante o curso de React e TypeScript, com aprimoramentos de 
+layout para uma experiência de usuário ainda mais intuitiva e agradável.
+
+Funcionalidades:
+
+- Autenticação: Login/registro de usuários com Firebase.
+- Dashboard: Visualização de histórico e carrinho.
+- Listagem de Carros: Exibição e filtros de busca.
+- Carrinho: Adicionar/remover carros com atualização em tempo real.
+- Banco de Dados: Dados sincronizados via Firebase Firestore.
+
+
+
+<br>
+
+
+## :rocket: Tecnologias Usadas
+
+
+Front-end 
+```
+REACTJS
+TYPESCRIPT
+```
+Back-end 
+```
+Firebase
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
