@@ -152,10 +152,6 @@ export function Car(){
                         <p className="mb-4">{car?.description}</p>
                     </div>
 
-                   
-
-                    
-
                     <a 
                         href={`https://api.whatsapp.com/send?phone=${car?.whatsapp}&text=Olá vi esse ${car?.name} e fiquei interessado.`}
                         target="_blank"

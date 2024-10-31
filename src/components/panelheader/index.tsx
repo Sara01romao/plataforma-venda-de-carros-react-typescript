@@ -10,7 +10,7 @@ export function DashboardHeader(){
    }
 
     return(
-        <div className='w-full items-center flex h-10 bg-red-500 rounded-lg text-white font-medium gap-4 px-4 m-4'>
+        <div className='w-full mx-auto items-center flex h-10 bg-red-500 rounded-lg text-white font-medium gap-4 px-4 m-4'>
             <Link to="/dashboard" className=" hover:text-red-950">Dashboard</Link>
             <Link to="/dashboard/new"  className=" hover:text-red-950">Cadastrar Carro</Link>
 

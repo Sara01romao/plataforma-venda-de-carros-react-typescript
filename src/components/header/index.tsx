@@ -18,22 +18,21 @@ export function Header(){
                     />
                 </Link>
                 
-                {!loadingAuth && signed && (
-                        <Link to="/dashboard">
-                            <div className='border-2 rounded-full p-1 border-gray-900'>
-                                <FiUser size={24} color="#000" />
-                            </div>
-                            
-                        </Link>
-                     )
-                }
+                {!loadingAuth && (
+               signed ? (
+                  <Link to="/dashboard">
+                     <div className="border-2 rounded-full p-1 border-gray-900">
+                        <FiUser size={24} color="#000" />
+                     </div>
+                  </Link>
+               ) : (
+                  <Link to="/dashboard">
+                     <FiLogIn size={24} color="#000" />
+                  </Link>
+               )
+            )}
+
                 
-                {!loadingAuth && !signed && (
-                        <Link to="/dashboard">
-                            <FiLogIn size={24} color="#000" />
-                        </Link>
-                     )
-                }
             </header>
         </div>
        

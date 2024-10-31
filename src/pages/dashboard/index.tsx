@@ -55,9 +55,7 @@ export function Dashboard(){
                     price: doc.data().price,
                     images: doc.data().images,
                     uid: doc.data().uid,
-                   
-                   
-                    
+
                 })
                })
 
